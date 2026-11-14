@@ -1,0 +1,9 @@
+{
+  "ui.open":    { "sounds": [ { "name": "pixelstats:ui_open",    "stream": false } ] },
+  "ui.close":   { "sounds": [ { "name": "pixelstats:ui_close",   "stream": false } ] },
+  "ui.hover":   { "sounds": [ { "name": "pixelstats:ui_hover",   "stream": false } ] },
+  "ui.click":   { "sounds": [ { "name": "pixelstats:ui_click",   "stream": false } ] },
+  "ui.upgrade": { "sounds": [ { "name": "pixelstats:ui_upgrade", "stream": false } ] },
+  "ui.deny":    { "sounds": [ { "name": "pixelstats:ui_deny",    "stream": false } ] },
+  "dodge":      { "sounds": [ { "name": "pixelstats:dodge",      "stream": false } ] }
+}
