@@ -38,4 +38,8 @@ public final class StatMath {
 
     // ---- LUC
     public static double lucCrit(int p) { return hyper(p, get(PixelConfig.LUC_CRIT_MAX), get(PixelConfig.LUC_CRIT_HALF)); }
+    /** Extra crit damage as a fraction: 0.4 = crits hit 40% harder than normal. */
+    public static double lucCritDamage(int p) { return hyper(p, get(PixelConfig.LUC_CRIT_DAMAGE_MAX), get(PixelConfig.LUC_CRIT_DAMAGE_HALF)); }
+    /** Chance that a kill drops bonus XP. */
+    public static double lucXpChance(int p) { return hyper(p, get(PixelConfig.LUC_XP_CHANCE_MAX), get(PixelConfig.LUC_XP_CHANCE_HALF)); }
 }

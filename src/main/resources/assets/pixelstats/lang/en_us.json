@@ -1,7 +1,6 @@
 {
   "key.pixelstats.open": "Open Status Window",
   "key.categories.pixelstats": "Pixel Stats",
-
   "screen.pixelstats.title": "STATUS",
   "screen.pixelstats.xp": "XP Level: %s",
   "screen.pixelstats.total": "Total points: %s",
@@ -10,20 +9,17 @@
   "screen.pixelstats.hint": "Click: +1   |   Shift+Click: +10",
   "screen.pixelstats.close": "Press %s or ESC to close",
   "screen.pixelstats.maxed": "MAX",
-
   "stat.pixelstats.dex": "Dexterity (DEX)",
   "stat.pixelstats.dex.desc": "Evasion and ranged mastery.",
   "stat.pixelstats.dex.e1": "Dodge chance: %s",
   "stat.pixelstats.dex.e2": "Ranged damage: %s",
   "stat.pixelstats.dex.e3": "Move speed: %s",
   "stat.pixelstats.dex.s": "Dodge %s  |  Ranged %s",
-
   "stat.pixelstats.str": "Strength (STR)",
   "stat.pixelstats.str.desc": "Melee power and a bit of health.",
   "stat.pixelstats.str.e1": "Melee damage: %s",
   "stat.pixelstats.str.e2": "Max HP: %s",
   "stat.pixelstats.str.s": "Melee %s  |  HP %s",
-
   "stat.pixelstats.con": "Constitution (CON)",
   "stat.pixelstats.con.desc": "Survival, toughness and recovery.",
   "stat.pixelstats.con.e1": "Max HP: %s",
@@ -31,29 +27,26 @@
   "stat.pixelstats.con.e3": "Harmful effect resist: %s",
   "stat.pixelstats.con.e4": "Knockback resist: %s",
   "stat.pixelstats.con.s": "HP %s  |  Resist %s",
-
   "stat.pixelstats.int": "Intelligence (INT)",
   "stat.pixelstats.int.desc": "Spell power and mana (Iron's Spells).",
   "stat.pixelstats.int.e1": "Spell power: %s",
   "stat.pixelstats.int.e2": "Max mana: %s",
   "stat.pixelstats.int.e3": "Mana regen: %s",
   "stat.pixelstats.int.s": "Power %s  |  Mana %s",
-
   "stat.pixelstats.luc": "Luck (LUC)",
-  "stat.pixelstats.luc.desc": "Critical hits, melee and ranged.",
+  "stat.pixelstats.luc.desc": "Critical hits, bonus XP and fortune.",
   "stat.pixelstats.luc.e1": "Crit chance: %s",
-  "stat.pixelstats.luc.s": "Crit chance %s",
-
+  "stat.pixelstats.luc.s": "Crit %s  |  XP luck %s",
   "stat.pixelstats.points": "Points invested: %s",
   "stat.pixelstats.irons_found": "Linked with Iron's Spells 'n Spellbooks",
   "stat.pixelstats.irons_missing": "Iron's Spells 'n Spellbooks not found - INT has no effect",
-
   "message.pixelstats.dodge": "DODGE!",
-
   "command.pixelstats.info": "%s -> DEX %s | STR %s | CON %s | INT %s | LUC %s",
   "command.pixelstats.modified": "Updated %s for %s player(s).",
   "command.pixelstats.reset": "Reset all stats of %s player(s).",
   "command.pixelstats.reset_one": "Reset %s of %s player(s).",
   "command.pixelstats.givelevels": "Gave %s XP level(s) to %s player(s).",
-  "command.pixelstats.unknown_stat": "Unknown stat. Use DEX, STR, CON, INT or LUC."
+  "command.pixelstats.unknown_stat": "Unknown stat. Use DEX, STR, CON, INT or LUC.",
+  "stat.pixelstats.luc.e2": "Crit damage: %s",
+  "stat.pixelstats.luc.e3": "Bonus XP drop chance: %s"
 }

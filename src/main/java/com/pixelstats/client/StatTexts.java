@@ -31,7 +31,7 @@ public final class StatTexts {
                     pct(StatMath.conEffectResist(p)), pct(StatMath.conKnockback(p))};
             case INT -> new String[] {"+" + pct(StatMath.intSpellPower(p)), "+" + num(StatMath.intMaxMana(p)),
                     "+" + pct(StatMath.intManaRegen(p))};
-            case LUC -> new String[] {pct(StatMath.lucCrit(p))};
+            case LUC -> new String[] {pct(StatMath.lucCrit(p)), "+" + pct(StatMath.lucCritDamage(p)), pct(StatMath.lucXpChance(p))};
         };
     }
 
@@ -42,7 +42,7 @@ public final class StatTexts {
         return switch (type) {
             case DEX, STR, INT -> Component.translatable(key, v[0], v[1]);
             case CON -> Component.translatable(key, v[0], v[2]);
-            case LUC -> Component.translatable(key, v[0]);
+            case LUC -> Component.translatable(key, v[0], v[2]);
         };
     }
 

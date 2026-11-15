@@ -39,6 +39,11 @@ public final class PixelConfig {
     // LUC
     public static final ForgeConfigSpec.DoubleValue LUC_CRIT_MAX;
     public static final ForgeConfigSpec.DoubleValue LUC_CRIT_HALF;
+    public static final ForgeConfigSpec.DoubleValue LUC_CRIT_DAMAGE_MAX;
+    public static final ForgeConfigSpec.DoubleValue LUC_CRIT_DAMAGE_HALF;
+    public static final ForgeConfigSpec.DoubleValue LUC_XP_CHANCE_MAX;
+    public static final ForgeConfigSpec.DoubleValue LUC_XP_CHANCE_HALF;
+    public static final ForgeConfigSpec.DoubleValue LUC_XP_BONUS;
 
     static {
         ForgeConfigSpec.Builder b = new ForgeConfigSpec.Builder();
@@ -79,6 +84,11 @@ public final class PixelConfig {
         b.push("luc");
         LUC_CRIT_MAX = dbl(b, "critChanceMax", "Max extra crit chance (0-1), melee and ranged. Never fully reached.", 0.60, 0, 1);
         LUC_CRIT_HALF = dbl(b, "critHalfPoints", "Points needed to reach half of the max crit chance.", 120, 1, 1_000_000);
+        LUC_CRIT_DAMAGE_MAX = dbl(b, "critDamageBonusMax", "Max EXTRA crit damage (1.5 = crits deal +150% of the normal crit damage). Never fully reached.", 1.5, 0, 100);
+        LUC_CRIT_DAMAGE_HALF = dbl(b, "critDamageHalfPoints", "Points needed to reach half of the max extra crit damage.", 250, 1, 1_000_000);
+        LUC_XP_CHANCE_MAX = dbl(b, "bonusXpChanceMax", "Max chance (0-1) that a mob you kill drops bonus XP. Never fully reached.", 0.50, 0, 1);
+        LUC_XP_CHANCE_HALF = dbl(b, "bonusXpHalfPoints", "Points needed to reach half of the max bonus-XP chance.", 200, 1, 1_000_000);
+        LUC_XP_BONUS = dbl(b, "bonusXpAmount", "Extra XP when the bonus triggers, as a fraction of the normal drop (1.0 = double XP).", 1.0, 0, 100);
         b.pop();
 
         SPEC = b.build();

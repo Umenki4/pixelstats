@@ -9,11 +9,19 @@ import net.minecraftforge.common.util.LazyOptional;
 /** Attaches PlayerStats to players and saves/loads it with the player data. */
 public class PlayerStatsProvider implements ICapabilitySerializable<CompoundTag> {
     private final PlayerStats stats = new PlayerStats();
-    private final LazyOptional<PlayerStats> optional = LazyOptional.of(() -> stats);
+    private LazyOptional<PlayerStats> optional = LazyOptional.of(() -> stats);
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        return cap == StatsApi.CAP ? optional.cast() : LazyOptional.empty();
+        if (cap != StatsApi.CAP) {
+            return LazyOptional.empty();
+        }
+        if (!optional.isPresent()) {
+            // After death Forge invalidates the old player's data and then revives it (reviveCaps) so it can be
+            // copied to the new body. Our LazyOptional must come back to life too, otherwise the copy reads "empty".
+            optional = LazyOptional.of(() -> stats);
+        }
+        return optional.cast();
     }
 
     @Override

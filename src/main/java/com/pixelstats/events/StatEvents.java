@@ -30,6 +30,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
@@ -154,7 +155,7 @@ public final class StatEvents {
 
         int luc = stats.get(StatType.LUC);
         if (luc > 0 && player.getRandom().nextDouble() < StatMath.lucCrit(luc)) {
-            amount *= 1.5F;
+            amount *= 1.5F * (1.0F + (float) StatMath.lucCritDamage(luc));
             LivingEntity victim = event.getEntity();
             player.serverLevel().sendParticles(ParticleTypes.CRIT, victim.getX(), victim.getY(0.5), victim.getZ(),
                     12, 0.3, 0.3, 0.3, 0.2);
@@ -171,17 +172,47 @@ public final class StatEvents {
 
     @SubscribeEvent
     public static void onCriticalHit(CriticalHitEvent event) {
-        if (!(event.getEntity() instanceof ServerPlayer player) || event.isVanillaCritical()) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) {
             return;
         }
-        if (player.getAttackStrengthScale(0.5F) < 0.9F) {
-            return; // only fully charged swings can crit
+        int luc = StatsApi.get(player).get(StatType.LUC);
+        if (luc <= 0) {
+            return;
+        }
+        boolean crit = event.isVanillaCritical();
+        if (!crit) {
+            if (player.getAttackStrengthScale(0.5F) < 0.9F) {
+                return; // only fully charged swings can crit
+            }
+            if (player.getRandom().nextDouble() < StatMath.lucCrit(luc)) {
+                event.setResult(Event.Result.ALLOW);
+                event.setDamageModifier(1.5F);
+                crit = true;
+            }
+        }
+        if (crit) {
+            // LUC makes EVERY critical hit (vanilla ones too) hit harder
+            event.setDamageModifier(event.getDamageModifier() * (1.0F + (float) StatMath.lucCritDamage(luc)));
+        }
+    }
+
+    // ------------------------------------------------------------------ LUC bonus XP from kills
+
+    @SubscribeEvent
+    public static void onExperienceDrop(LivingExperienceDropEvent event) {
+        if (!(event.getAttackingPlayer() instanceof ServerPlayer player)) {
+            return;
         }
         int luc = StatsApi.get(player).get(StatType.LUC);
-        if (luc > 0 && player.getRandom().nextDouble() < StatMath.lucCrit(luc)) {
-            event.setResult(Event.Result.ALLOW);
-            event.setDamageModifier(1.5F);
+        int dropped = event.getDroppedExperience();
+        if (luc <= 0 || dropped <= 0 || player.getRandom().nextDouble() >= StatMath.lucXpChance(luc)) {
+            return;
         }
+        int extra = Math.max(1, (int) Math.round(dropped * PixelConfig.get(PixelConfig.LUC_XP_BONUS)));
+        event.setDroppedExperience(dropped + extra);
+        LivingEntity victim = event.getEntity();
+        player.serverLevel().sendParticles(ParticleTypes.HAPPY_VILLAGER, victim.getX(), victim.getY(0.5), victim.getZ(),
+                8, 0.3, 0.3, 0.3, 0.05);
     }
 
     // ------------------------------------------------------------------ CON: resist harmful effects
